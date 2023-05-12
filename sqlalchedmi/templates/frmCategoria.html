@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+
+{% block contenido %}
+<div class="container h-100 frmCategoria">
+    <div class="row d-flex justify-content-center align-items-center h-50">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="border ">
+                <div class="bg-white p-4 text-center">
+                    <h3 class="mb-3 fw-bold">AGREGAR CATEGORIA</h3>
+                    <form action="/agregarCategoria" method="post" class="was-validated">
+                        <div class="form-floating mb-4">
+                            <input type="text" name="txtNombre" id="txtNombre" class="form-control" required
+                                placeholder="Ingrese el nombre de la categoria">
+                            <label for="txtNombre">Ingrese el nombre de la categoria</label>
+                        </div>  
+                        <div class="mt-5">
+                            <button class="btn  mb-2 fw-bold" style="background-color: darkgray;" >AGREGAR</button>
+                        </div>
+                    </form>
+                    <div>
+                        {% if mensaje %}
+                            {% if estado %}
+                                <script>
+                                    Swal.fire("AGREGAR CATEGORIA", '{{mensaje}}', "success")
+                                </script>
+                            {% else %}
+                                <script>
+                                    Swal.fire("AGREGAR CATEGORIA", '{{mensaje}}', "warning")
+                                </script>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

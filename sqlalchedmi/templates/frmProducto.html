@@ -1,0 +1,76 @@
+{% extends "index.html" %}
+
+{% block encabezado %}
+    {% include "encabezado.html" %}
+{% endblock %}
+
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+
+{% block contenido %}
+<div class="container h-100 frmProducto">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-10 col-md-8 col-lg-6 col-xl-5">
+            <div class="border shadow-2-strong">
+                <div class="bg-white p-5 text-center">
+                    <h3 class="mb-5 fw-bold" >AGREGAR PRODUCTO</h3>
+                    <form id="frmProducto" action="/agregarProducto" method="post" enctype="multipart/form-data" class="was-validated">
+                        <div class="form-floating mb-4">
+                            <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" required
+                                placeholder="Código del prodcuto" value="{{producto.proCodigo}}">
+                            <label for="txtCodigo">Código del producto</label>
+                        </div>  
+                        <div class="form-floating mb-4">
+                            <input type="text" name="txtNombreP" id="txtNombreP" class="form-control" required
+                                placeholder="Nombre del producto" value="{{producto.proNombre}}">
+                            <label for="txtNombreP">Nombre del producto</label>
+                        </div>  
+                        <div class="form-floating mb-4">
+                            <input type="number" name="txtPrecio" id="txtPrecio" class="form-control" required
+                                placeholder="Precio del producto" value="{{producto.proPrecio}}">
+                            <label for="txtPrecio">Precio del producto</label>
+                        </div>  
+                        <div class="form-floating mb-4">
+                            <select class="form-select" id="cbCategoria" name="cbCategoria" required value="{{producto.proCategoria}}">
+                                <option value="">Seleccione</option>
+                                {% for categoria in listaCategorias %}
+                                    {% if categoria.idCategoria==producto.proCategoria%}
+                                        <option value="{{categoria.idCategoria}}" selected>{{categoria.catNombre}}</option>
+                                    {% else %}
+                                        <option value="{{categoria.idCategoria}}">{{categoria.catNombre}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                              <label for="cbCategoria" class="form-label">Categoria del prodcuto</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="file" name="fileFoto" id="fileFoto" class="form-control" required accept=".jpg" accept=".jpg" placeholder="Cargar foto">
+                            <label for="fileFoto">Cargar foto</label>
+                        </div>
+                        <div class="text-center">
+                            <img id="imagenProducto" src="" alt="" width="100" height="100">
+                        </div>
+                        <div class="mt-5">
+                            <button class="btn mb-2 fw-bold" style="background-color: darkgray;">AGREGAR</button>
+                        </div>
+                    </form>
+                    <div>
+                        {% if mensaje %}
+                            {% if estado %}
+                                <script>
+                                    Swal.fire("AGREGAR PRODUCTO", '{{mensaje}}', "success")
+                                </script>
+                            {% else %}
+                                <script>
+                                    Swal.fire("AGREGAR PRODUCTO", '{{mensaje}}', "warning")
+                                </script>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
